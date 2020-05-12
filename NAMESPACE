@@ -1,0 +1,13 @@
+# Exports
+
+export(D.measure)
+export(RobustBayesianCopas)
+export(BayesNonBiasCorrected)
+export(StandardMetaAnalysis)
+export(CopasLikeSelection)
+
+# Imports
+
+importFrom("stats","optim", "integrate", "update", "sd", "median", "pnorm")
+importFrom("statip", "densityfun")
+importFrom("rjags", "jags.model", "coda.samples")
