@@ -41,9 +41,7 @@ StandardMetaAnalysis <- function(y, s, init = NULL, tol=1e-10, maxit=1000){
   # If initial values were specified but not of correct length
   if(!is.null(init)){
     if(length(init) != 2)
-      stop("ERROR: Please enter initial values for (theta, tau) in this exact order.")
-    if(init[2] <= 0)
-      stop("ERROR: Please enter initial tau > 0.")
+      stop("Please enter a vector of length 2 for initial values of (theta, tau).")
   }
   
   # Maximize the log-likelihood

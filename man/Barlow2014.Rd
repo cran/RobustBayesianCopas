@@ -8,11 +8,11 @@
 \format{
 A dataframe with 26 studies with the following five variables within each study.
 \describe{
-    \item{\code{y}:}{standardized mean differences in improvement of parental psychosocial health.}
-    \item{\code{s}:}{sample standard errors of standardized mean differences.}
-    \item{\code{n1}:}{sample sizes in treatment group 1 (parent training programs).}
-    \item{\code{n2}:}{sample sizes in treatment group 2 (control).}
-    \item{\code{n}:}{total sample size.}
+    \item{\code{y}:}{Standardized mean differences in improvement of parental psychosocial health.}
+    \item{\code{s}:}{Sample standard errors of standardized mean differences.}
+    \item{\code{n1}:}{Sample sizes in treatment group 1 (parent training programs).}
+    \item{\code{n2}:}{Sample sizes in treatment group 2 (control).}
+    \item{\code{n}:}{Total sample size.}
   }
 }
 

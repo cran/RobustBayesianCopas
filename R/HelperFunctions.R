@@ -3,7 +3,6 @@
 ######################
 
 # for the E-step in the EM algorithm for the Copas-like selection model
-#' @keywords internal
 E.m=function(para,data){ # used for E step in EM 
   theta=para[1] ;   tau=para[2] ;   rho=para[3]
   gamma0=para[4];    gamma1=para[5]
@@ -20,7 +19,6 @@ E.m=function(para,data){ # used for E step in EM
 
 # the log likelihood function for the M-step in the EM algorithm
 # for the Copas-like selection model
-#' @keywords internal
 E.loglik=function(para,data,m){ 
   theta=para[1] ;   tau=para[2] ;   rho=para[3]
   gamma0=para[4];    gamma1=para[5]
@@ -40,7 +38,6 @@ E.loglik=function(para,data,m){
 
 
 # the log likelihood function for the standard random effects meta-analysis
-#' @keywords internal
 RE.loglik=function(para,data){ 
   theta=para[1]    
   tau.sq=para[2]^2 
@@ -53,8 +50,7 @@ RE.loglik=function(para,data){
 }
 
 
-## Estimate optimal gamma0, gamma1 given other parameters (theta,tau,rho)
-#' @keywords internal
+## Estimate rho given other parameters (theta,tau,gamma0,gamma1)
 optimal.gammas=function(data,theta,tau,rho){
   
   # Initial (gamma0,gamma1)
@@ -70,7 +66,6 @@ optimal.gammas=function(data,theta,tau,rho){
 }
 
 ## Log-likelihood of original Copas selection model
-#' @keywords internal
 loglik.Copas=function(gamma.params,theta,tau,rho,data){
   
   theta.hat=data[,1]; s=data[,2];

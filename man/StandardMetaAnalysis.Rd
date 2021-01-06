@@ -15,9 +15,9 @@ StandardMetaAnalysis(y, s, init = NULL, tol=1e-10, maxit=1000)
 }
 
 \arguments{
-  \item{y}{an \eqn{n \times 1} vector of reported treatment effects.}
-  \item{s}{an \eqn{n \times 1} vector of reported within-study standard errors.}
-  \item{init}{optional initialization values for \eqn{(\theta, \tau)}. If specified, they must be provided in this order. If they are not provided, the program estimates initial values from the data.}
+  \item{y}{An \eqn{n \times 1} vector of reported treatment effects.}
+  \item{s}{An \eqn{n \times 1} vector of reported within-study standard errors.}
+  \item{init}{Optional initialization values for \eqn{(\theta, \tau)}. If specified, they must be provided in this order. If they are not provided, the program estimates initial values from the data.}
   \item{tol}{Convergence criterion for the optimization algorithm for finding the MLE. Default is \code{tol=1e-10}.}
   \item{maxit}{Maximum number of iterations for the optimization algorithm for finding the MLE. Default is \code{maxit=1000}.}
 }
@@ -39,7 +39,7 @@ Ning, J., Chen, Y., and Piao, J. (2017). "Maximum likelihood estimation and EM a
 
 ############################################
 # Example on the antidepressants data set. #
-# This is from Section 7.2 of the paper by #
+# This is from Section 6.2 of the paper by #
 # Bai et al. (2020).                       #
 ############################################
 # Load the full data
@@ -57,6 +57,10 @@ s.obs = published.data$Standardized_SE
 # Fit a standard meta-analysis  #
 # that ignores publication bias #
 #################################
+
+# Set seed
+set.seed(123)
+
 SMA.mod = StandardMetaAnalysis(y=y.obs, s=s.obs)
 
 # Point estimate for theta
@@ -72,38 +76,4 @@ SMA.interval = c(SMA.theta.hat-1.96*SMA.theta.se, SMA.theta.hat+1.96*SMA.theta.s
 SMA.theta.hat
 SMA.theta.se
 SMA.interval
-
-\donttest{
-######################################
-# Example on the Barlow2014 data set #
-######################################
-data(Barlow2014)
-attach(Barlow2014)
-# Observed treatment effect
-y.obs = Barlow2014[,1]
-# Observed standard error
-s.obs = Barlow2014[,2]
-
-#################################
-# Fit a standard meta-analysis  #
-# that ignores publication bias #
-#################################
-SMA.mod = StandardMetaAnalysis(y=y.obs, s=s.obs)
-
-# Point estimate for theta
-SMA.theta.hat = SMA.mod$theta.hat
-
-# Use Hessian to estimate standard error for theta
-SMA.Hessian = SMA.mod$H
-# Standard error estimate for theta
-SMA.theta.se = sqrt(SMA.Hessian[1,1]) 
-
-# 95 percent confidence interval 
-SMA.interval = c(SMA.theta.hat-1.96*SMA.theta.se, SMA.theta.hat+1.96*SMA.theta.se)
-
-# Display results
-SMA.theta.hat
-SMA.theta.se
-SMA.interval
-}
 }

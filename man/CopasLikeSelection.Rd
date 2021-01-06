@@ -20,9 +20,9 @@ This is called the "Copas-like selection model" because to find the MLE, the EM 
 CopasLikeSelection(y, s, init = NULL, tol=1e-20, maxit=1000)
 }
 \arguments{
-  \item{y}{an \eqn{n \times 1} vector of reported treatment effects.}
-  \item{s}{an \eqn{n \times 1} vector of reported within-study standard errors.}
-  \item{init}{optional initialization values for \eqn{(\theta, \tau, \rho, \gamma_0, \gamma_1)}. If specified, they must be provided in this exact order. If they are not provided, the program estimates initial values from the data.}
+  \item{y}{An \eqn{n \times 1} vector of reported treatment effects.}
+  \item{s}{An \eqn{n \times 1} vector of reported within-study standard errors.}
+  \item{init}{Optional initialization values for \eqn{(\theta, \tau, \rho, \gamma_0, \gamma_1)}. If specified, they must be provided in this exact order. If they are not provided, the program estimates initial values from the data.}
   \item{tol}{Convergence criterion for the Copas-like EM algorithm for finding the MLE. Default is \code{tol=1e-20}.}
   \item{maxit}{Maximum number of iterations for the Copas-like EM algorithm for finding the MLE. Default is \code{maxit=1000}.}
 }
@@ -43,36 +43,44 @@ Ning, J., Chen, Y., and Piao, J. (2017). "Maximum likelihood estimation and EM a
 
 \examples{
 
-######################################
-# Example on the Barlow2014 data set #
-######################################
-data(Barlow2014)
-attach(Barlow2014)
-# Observed treatment effect
-y.obs = Barlow2014[,1]
-# Observed standard error
-s.obs = Barlow2014[,2]
+####################################
+# Example on the Hackshaw data set #
+####################################
+data(Hackshaw1997)
+attach(Hackshaw1997)
+# Extract the log OR
+y.obs = Hackshaw1997[,2]
+# Extract the observed standard error
+s.obs = Hackshaw1997[,3]
 
 ##################################
 # Fit Copas-like selection model #
 ##################################
-CLS.mod = CopasLikeSelection(y=y.obs, s=s.obs)
 
-# Point estimate for theta
+# First fit RBC model with normal errors
+RBC.mod = RobustBayesianCopas(y=y.obs, s=s.obs, re.dist="normal", seed=123, burn=500, nmc=500)
+
+# Fit CLS model with initial values given from RBC model fit.
+# Initialization is not necessary but the algorithm will converge faster with initialization.
+CLS.mod = CopasLikeSelection(y=y.obs, s=s.obs, init=c(RBC.mod$theta.hat, RBC.mod$tau.hat,
+                                                       RBC.mod$rho.hat, RBC.mod$gamma0.hat,
+                                                    RBC.mod$gamma1.hat))
+
+# Point estimate for theta 
 CLS.theta.hat = CLS.mod$theta.hat  
 
 # Use Hessian to estimate standard error for theta
 CLS.Hessian = CLS.mod$H
 # Standard error estimate for theta
-CLS.theta.se = sqrt(CLS.Hessian[1,1]) # 0.02235201
+CLS.theta.se = sqrt(CLS.Hessian[1,1]) # 
 
-# 95 percent confidence interval (0.3656911, 0.4533110)
+# 95 percent confidence interval 
 CLS.interval = c(CLS.theta.hat-1.96*CLS.theta.se, CLS.theta.hat+1.96*CLS.theta.se)
 
 # Display results
-CLS.theta.hat
-CLS.theta.se
-CLS.interval
+CLS.theta.hat  
+CLS.theta.se  
+CLS.interval   
 
 # Other parameters controlling the publication bias
 CLS.mod$rho.hat 

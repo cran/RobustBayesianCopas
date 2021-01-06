@@ -8,10 +8,10 @@
 \format{
 A dataframe with 37 studies with the following four variables within each study. 
 \describe{
-    \item{\code{Study}:}{study identifier.}
-    \item{\code{log_OR}:}{the reported log-odds ratio. Use this as the treatment effect in meta-analysis.}
-    \item{\code{SE}:}{the reported standard error.}
-    \item{\code{weight}:}{the percent weight that the study contributes to the pooled log-odds ratio.}
+    \item{\code{Study}:}{Study identifier.}
+    \item{\code{log_OR}:}{The reported log-odds ratio. Use this as the treatment effect in meta-analysis.}
+    \item{\code{SE}:}{The reported standard error.}
+    \item{\code{weight}:}{The percent weight that the study contributes to the pooled log-odds ratio.}
   }
 }
 

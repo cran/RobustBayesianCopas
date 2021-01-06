@@ -8,13 +8,13 @@
 \format{
 A dataframe with 73 studies with the following seven variables. 
 \describe{
-    \item{\code{Drug}:}{antidepressant name.}
-    \item{\code{Study}:}{study identifier.}
-    \item{\code{Published}:}{a binary variable indicating whether the study was published: "1"=published, "0"=not published.}
-    \item{\code{Nonstandardized_effect_size}:}{estimated mean improvement in depression symptoms (nonstandardized).}
-    \item{\code{Nonstandardized_SE}:}{estimated standard error (nonstandardized).}
-    \item{\code{Standardized_effect_size}}{estimated mean improvement in depression symptoms (standardized). Note that the standardized values are only available for the \emph{published} studies (\code{NA} if not published). The \emph{non}-missing data in this column should be used as \code{y} in the selection model.}
-        \item{\code{Standardized_SE}:}{estimated standard error (standardized). Note that the standardized values are only available for the \emph{published} studies (\code{NA} if not published). The \emph{non}-missing data in this column should be used as \code{s} in the selection model. }
+    \item{\code{Drug}:}{Antidepressant name.}
+    \item{\code{Study}:}{Study identifier.}
+    \item{\code{Published}:}{A binary variable indicating whether the study was published: "1"=published, "0"=not published.}
+    \item{\code{Nonstandardized_effect_size}:}{Estimated mean improvement in depression symptoms (nonstandardized).}
+    \item{\code{Nonstandardized_SE}:}{Estimated standard error (nonstandardized).}
+    \item{\code{Standardized_effect_size}}{Estimated mean improvement in depression symptoms (standardized). Note that the standardized values are only available for the \emph{published} studies (\code{NA} if not published). The \emph{non}-missing data in this column should be used as \code{y} in the selection model.}
+        \item{\code{Standardized_SE}:}{Estimated standard error (standardized). Note that the standardized values are only available for the \emph{published} studies (\code{NA} if not published). The \emph{non}-missing data in this column should be used as \code{s} in the selection model. }
   }
 }
 

@@ -39,14 +39,13 @@ CopasLikeSelection <- function(y, s, init = NULL, tol=1e-20, maxit=1000){
   
     ### for initial estimates of (1) theta (2) tau (3) rho (4) gamma0 and (5) gamma1
     init = rep(0,5)
-    max.s = max(s)
     
     # initial estimate of theta
     init[1]=mean(data[,1])
     # moment estimator for tau
     init[2]=sqrt(abs(sd(data[,1])^2-(sd(data[,2])^2+mean(data[,2])^2)))
     
-    rho.test=seq(-0.95,0.95,by=0.05)
+    rho.test=seq(-0.98,0.98,by=0.05)
     
     test = vector(mode = "list", length = length(rho.test))
     for(k in 1:length(test)){
@@ -62,7 +61,7 @@ CopasLikeSelection <- function(y, s, init = NULL, tol=1e-20, maxit=1000){
         loglik.max.index = k
       }
     }  
-    # initial value fo rho
+    # initial value for rho
     init[3] = rho.test[loglik.max.index]
     # initial value for gamma0
     init[4] = as.double(test[[loglik.max.index]][1])
@@ -73,11 +72,13 @@ CopasLikeSelection <- function(y, s, init = NULL, tol=1e-20, maxit=1000){
   # If initial values were specified but not of correct length
   if(!is.null(init)){
     if(length(init) != 5)
-      stop("ERROR: Please enter initial values for (theta, tau, rho, gamma0, gamma1) in this exact order.")
-    if(init[2] <= 0)
-      stop("ERROR: Please enter initial tau > 0.")
-    if((init[3]<=-1) || (init[3]>= 1))
-      stop("ERROR: Please enter initial rho between -1 and 1.")
+      stop("Please enter a vector of length 5 for initial values of (theta, tau, rho, gamma0, gamma1) in this order.")
+    
+    if(init[3]>=1){
+      init[3] = 0.98
+    } else if(init[3]<=-1){
+      init[3] = -0.98
+    }
   }
 
   par.new = init # Initialize values
